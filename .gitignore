@@ -1,4 +1,6 @@
 package-lock.json
+key.txt
+list.txt
 node_modules/*
 .idea/*
 

@@ -4,6 +4,7 @@ const request = require("request");
 const https = require("https");
 
 const app = express();
+const fs = require('fs');
 
 //app.use(bodyParser.apply())
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -18,9 +19,15 @@ app.post("/", (req, res) => {
     const firstName = req.body.fn;
     const lastName = req.body.ln;
     const eMail = req.body.em;
-    if(firstName === "" || lastName === "" || eMail === ""){
-        res.sendFile(__dirname + "/failure.html");
-    }
+
+    var apiKey = fs.readFileSync('key.txt', 'utf8');
+    console.log(apiKey.toString());
+    var listKey = fs.readFileSync('list.txt', 'utf8');
+    console.log(listKey.toString());
+    
+    // if(firstName === "" || lastName === "" || eMail === ""){
+    //     res.sendFile(__dirname + "/failure.html");
+    // }
 
     var data = {
         members: [
@@ -36,10 +43,10 @@ app.post("/", (req, res) => {
         ]
     }
     
-    var url = "https://us20.api.mailchimp.com/3.0/lists/bce28ee213";
+    var url = "https://us20.api.mailchimp.com/3.0/lists/" + listKey;
     var options = {
         method: "POST",
-        auth: "hasan1:e703749ff68b75beddd6f1122b4c2979-us20"
+        auth: "hasan1:" + apiKey
     };
     var jsonData = JSON.stringify(data);
     var code;

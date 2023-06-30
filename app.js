@@ -20,9 +20,9 @@ app.post("/", (req, res) => {
     const lastName = req.body.ln;
     const eMail = req.body.em;
 
-    var apiKey = fs.readFileSync('key.txt', 'utf8');
+    var apiKey = fs.readFileSync( __dirname + '/key.txt', 'utf8');
     console.log(apiKey.toString());
-    var listKey = fs.readFileSync('list.txt', 'utf8');
+    var listKey = fs.readFileSync(__dirname + '/list.txt', 'utf8');
     console.log(listKey.toString());
     
     // if(firstName === "" || lastName === "" || eMail === ""){
